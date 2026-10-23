@@ -1,5 +1,5 @@
 {
-  "name": "@ultirequiem/ultraqs",
+  "name": "ultraqs",
   "version": "0.0.0-development",
   "description": "Add query parameters to a URL.",
   "type": "module",

@@ -2,19 +2,19 @@
 
 Add query parameters to a URL.
 
-[![npm](https://img.shields.io/npm/v/@ultirequiem/ultraqs?logo=npm&color=cb3837)](https://www.npmjs.com/package/@ultirequiem/ultraqs)
-[![npm downloads](https://img.shields.io/npm/dm/@ultirequiem/ultraqs?color=cb3837)](https://www.npmjs.com/package/@ultirequiem/ultraqs)
+[![npm](https://img.shields.io/npm/v/ultraqs?logo=npm&color=cb3837)](https://www.npmjs.com/package/ultraqs)
+[![npm downloads](https://img.shields.io/npm/dm/ultraqs?color=cb3837)](https://www.npmjs.com/package/ultraqs)
 [![CI](https://github.com/UltiRequiem/ultraqs/actions/workflows/ci.yaml/badge.svg)](https://github.com/UltiRequiem/ultraqs/actions/workflows/ci.yaml)
 [![codecov](https://codecov.io/gh/UltiRequiem/ultraqs/graph/badge.svg)](https://codecov.io/gh/UltiRequiem/ultraqs)
 
 ## Install
 
 ```sh
-npm install @ultirequiem/ultraqs
+npm install ultraqs
 ```
 
 ```javascript
-import { addParams } from "@ultirequiem/ultraqs";
+import { addParams } from "ultraqs";
 
 addParams("https://ultirequiem.com", { page: 33, author: "Me", share: false });
 //=> https://ultirequiem.com/?page=33&author=Me&share=false
@@ -58,7 +58,7 @@ a real [Zod](https://zod.dev)/Valibot schema exposes, so you can mix them in
 with **zero dependency** on either:
 
 ```ts
-import { parse, t } from "@ultirequiem/ultraqs";
+import { parse, t } from "ultraqs";
 
 parse("?page=2&tags=js,ts", {
   array: "comma",
