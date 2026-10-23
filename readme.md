@@ -1,23 +1,11 @@
 # ultraqs
 
 [![Code Coverage](https://codecov.io/gh/UltiRequiem/ultraqs/branch/main/graph/badge.svg)](https://codecov.io/gh/UltiRequiem/ultraqs)
-[![JSR](https://jsr.io/badges/@ultirequiem/ultraqs)](https://jsr.io/@ultirequiem/ultraqs)
-
-The safest way to build
-[Query Parameters](https://wikipedia.org/wiki/Query_string) in TypeScript — zero
-dependencies, works identically in Deno, Node, Bun, and the browser.
 
 ## Install
 
-Published on [JSR](https://jsr.io/@ultirequiem/ultraqs) — works everywhere from
-one package, no separate npm publish needed.
-
 ```sh
-# Deno
-deno add @ultirequiem/ultraqs
-
-# Node / Bun / any npm-compatible tool
-npx jsr add @ultirequiem/ultraqs
+npm install @ultirequiem/ultraqs
 ```
 
 ```javascript
@@ -77,11 +65,6 @@ parse("?page=2&tags=js,ts", {
 Since query values arrive as strings, prefer
 `z.coerce.number()`/`z.coerce.boolean()` over `z.number()`/`z.boolean()` when
 passing in a real Zod schema.
-
-## Documentation
-
-Full API reference is auto-generated on
-[jsr.io/@ultirequiem/ultraqs](https://jsr.io/@ultirequiem/ultraqs) 📄
 
 ## Versioning
 
