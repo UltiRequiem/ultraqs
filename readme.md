@@ -1,6 +1,11 @@
 # ultraqs
 
-[![Code Coverage](https://codecov.io/gh/UltiRequiem/ultraqs/branch/main/graph/badge.svg)](https://codecov.io/gh/UltiRequiem/ultraqs)
+Add query parameters to a URL.
+
+[![npm](https://img.shields.io/npm/v/@ultirequiem/ultraqs?logo=npm&color=cb3837)](https://www.npmjs.com/package/@ultirequiem/ultraqs)
+[![npm downloads](https://img.shields.io/npm/dm/@ultirequiem/ultraqs?color=cb3837)](https://www.npmjs.com/package/@ultirequiem/ultraqs)
+[![CI](https://github.com/UltiRequiem/ultraqs/actions/workflows/ci.yaml/badge.svg)](https://github.com/UltiRequiem/ultraqs/actions/workflows/ci.yaml)
+[![codecov](https://codecov.io/gh/UltiRequiem/ultraqs/graph/badge.svg)](https://codecov.io/gh/UltiRequiem/ultraqs)
 
 ## Install
 
