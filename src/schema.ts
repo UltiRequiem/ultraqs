@@ -32,12 +32,12 @@ function makeSchema<T>(parse: (value: unknown) => T): Schema<T> {
     parse,
     optional(): Schema<T | undefined> {
       return makeSchema((value) =>
-        value === undefined ? undefined : parse(value)
+        value === undefined ? undefined : parse(value),
       );
     },
     default(fallback: T): Schema<T> {
       return makeSchema((value) =>
-        value === undefined ? fallback : parse(value)
+        value === undefined ? fallback : parse(value),
       );
     },
   };
@@ -70,18 +70,24 @@ function numberSchema(
 
   return Object.assign(base, {
     min(minimum: number): NumberSchema {
-      return numberSchema([...checks, (num) => {
-        if (num < minimum) {
-          throw new RangeError(`Expected >= ${minimum}, got ${num}`);
-        }
-      }]);
+      return numberSchema([
+        ...checks,
+        (num) => {
+          if (num < minimum) {
+            throw new RangeError(`Expected >= ${minimum}, got ${num}`);
+          }
+        },
+      ]);
     },
     max(maximum: number): NumberSchema {
-      return numberSchema([...checks, (num) => {
-        if (num > maximum) {
-          throw new RangeError(`Expected <= ${maximum}, got ${num}`);
-        }
-      }]);
+      return numberSchema([
+        ...checks,
+        (num) => {
+          if (num > maximum) {
+            throw new RangeError(`Expected <= ${maximum}, got ${num}`);
+          }
+        },
+      ]);
     },
   });
 }

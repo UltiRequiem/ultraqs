@@ -1,6 +1,6 @@
-import { parseUrlLike } from "./url-like.ts";
-import type { ArrayStrategy, NestedStrategy } from "./types.ts";
-import type { InferSchema, Parseable, SchemaMap } from "./schema.ts";
+import { parseUrlLike } from "./url-like.js";
+import type { ArrayStrategy, NestedStrategy } from "./types.js";
+import type { InferSchema, Parseable, SchemaMap } from "./schema.js";
 
 type Pair = [string, string];
 
@@ -17,7 +17,9 @@ function groupByKey(pairs: Pair[]): Map<string, string[]> {
 function parseBracketPath(key: string): string[] {
   const segments = key.match(/^[^[\]]+|\[[^[\]]*\]/g) ?? [key];
   return segments
-    .map((segment) => segment.startsWith("[") ? segment.slice(1, -1) : segment)
+    .map((segment) =>
+      segment.startsWith("[") ? segment.slice(1, -1) : segment,
+    )
     .filter((segment) => segment !== "");
 }
 
@@ -55,7 +57,8 @@ function unflatten(
       key = key.slice(0, -2);
       value = values;
     } else if (
-      options.array === "comma" && values.length === 1 &&
+      options.array === "comma" &&
+      values.length === 1 &&
       values[0].includes(",")
     ) {
       value = values[0].split(",");

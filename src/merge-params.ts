@@ -1,5 +1,5 @@
-import { addParams } from "./add-params.ts";
-import type { SerializeOptions } from "./types.ts";
+import { addParams } from "./add-params.js";
+import type { SerializeOptions } from "./types.js";
 
 /**
  * Merge parameters into an existing URL's query string. Identical to

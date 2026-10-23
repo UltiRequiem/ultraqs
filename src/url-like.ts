@@ -36,9 +36,8 @@ export function parseUrlLike(url: string | URL): UrlLike {
 
     const queryIndex = withoutHash.indexOf("?");
     const search = queryIndex === -1 ? "" : withoutHash.slice(queryIndex + 1);
-    const pathname = queryIndex === -1
-      ? withoutHash
-      : withoutHash.slice(0, queryIndex);
+    const pathname =
+      queryIndex === -1 ? withoutHash : withoutHash.slice(0, queryIndex);
 
     return { absolute: false, prefix: "", pathname, search, hash };
   }

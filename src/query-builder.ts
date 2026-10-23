@@ -1,5 +1,5 @@
-import { parseUrlLike, reassemble } from "./url-like.ts";
-import { combine, decodePairs, flatten, serializePairs } from "./serialize.ts";
+import { parseUrlLike, reassemble } from "./url-like.js";
+import { combine, decodePairs, flatten, serializePairs } from "./serialize.js";
 
 /** Fluent builder returned by {@link query}. Every method returns `this` for chaining. */
 export interface QueryBuilder {

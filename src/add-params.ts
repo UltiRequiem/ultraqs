@@ -1,6 +1,6 @@
-import { parseUrlLike, reassemble } from "./url-like.ts";
-import { combine, decodePairs, flatten, serializePairs } from "./serialize.ts";
-import type { SerializeOptions } from "./types.ts";
+import { parseUrlLike, reassemble } from "./url-like.js";
+import { combine, decodePairs, flatten, serializePairs } from "./serialize.js";
+import type { SerializeOptions } from "./types.js";
 
 /**
  * Add Query Parameters to a URL.

@@ -1,63 +1,25 @@
 name: CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
 
 jobs:
-  build:
-    name: Test (${{ matrix.os }})
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
-      fail-fast: true
+  ci:
+    name: CI
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v7
-
-      - name: Setup Deno
-        uses: denoland/setup-deno@v2
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
         with:
-          deno-version: v2.x
-
-      - name: Setup Node
-        if: matrix.os == 'ubuntu-latest'
-        uses: actions/setup-node@v7
-        with:
-          node-version: "22"
-
-      - name: Setup Bun
-        if: matrix.os == 'ubuntu-latest'
-        uses: oven-sh/setup-bun@v2
-
-      - name: Check Code Format
-        if: matrix.os == 'ubuntu-latest'
-        run: deno fmt --check
-
-      - name: Lint
-        if: matrix.os == 'ubuntu-latest'
-        run: deno lint
-
-      - name: Check
-        if: matrix.os == 'ubuntu-latest'
-        run: deno check mod.ts
-
-      - name: Test (Deno)
-        run: deno test --coverage=./cov
-
-      - name: Test (Node)
-        if: matrix.os == 'ubuntu-latest'
-        run: node --experimental-strip-types --test
-
-      - name: Test (Bun)
-        if: matrix.os == 'ubuntu-latest'
-        run: bun test
-
-      - name: Generate Coverage
-        if: matrix.os == 'ubuntu-latest'
-        run: deno coverage --unstable --lcov ./cov > cov.lcov
-
-      - name: Upload Coverage
-        if: matrix.os == 'ubuntu-latest'
-        uses: codecov/codecov-action@v2
-        with:
-          files: cov.lcov
+          node-version: "24"
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run lint
+      - run: pnpm run test
+      - run: pnpm run build

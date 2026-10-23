@@ -3,7 +3,7 @@ import type {
   MergeStrategy,
   NestedStrategy,
   SerializeOptions,
-} from "./types.ts";
+} from "./types.js";
 
 type Pair = [string, string];
 
@@ -15,11 +15,7 @@ function isPlainObject(value: unknown): value is Record<string, unknown> {
   return proto === Object.prototype || proto === null;
 }
 
-function stringifyScalar(
-  value: unknown,
-  key: string,
-  strict: boolean,
-): string {
+function stringifyScalar(value: unknown, key: string, strict: boolean): string {
   if (typeof value === "boolean") return value ? "true" : "false";
   if (typeof value === "number" || typeof value === "string") {
     return String(value);
@@ -73,9 +69,7 @@ function flattenValue(
     if (opts.array === "comma") {
       out.push([
         key,
-        value.map((item) => stringifyScalar(item, key, opts.strict)).join(
-          ",",
-        ),
+        value.map((item) => stringifyScalar(item, key, opts.strict)).join(","),
       ]);
     } else if (opts.array === "bracket") {
       for (const item of value) {
@@ -96,9 +90,10 @@ function flattenValue(
       );
     }
     for (const [childKey, childValue] of Object.entries(value)) {
-      const nextKey = opts.nested === "bracket"
-        ? `${key}[${childKey}]`
-        : `${key}.${childKey}`;
+      const nextKey =
+        opts.nested === "bracket"
+          ? `${key}[${childKey}]`
+          : `${key}.${childKey}`;
       flattenValue(nextKey, childValue, opts, out);
     }
     return;
@@ -184,17 +179,19 @@ export function serializePairs(
   const encode = options.encode ?? true;
   const signatureSafe = options.signatureSafe ?? false;
 
-  const ordered = sort || signatureSafe
-    ? [...pairs].sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0)
-    : pairs;
+  const ordered =
+    sort || signatureSafe
+      ? [...pairs].sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))
+      : pairs;
 
   const encoder = signatureSafe
     ? canonicalEncodeComponent
     : encode
-    ? encodeComponent
-    : (value: string) => value;
+      ? encodeComponent
+      : (value: string) => value;
 
-  return ordered.map(([key, value]) => `${encoder(key)}=${encoder(value)}`)
+  return ordered
+    .map(([key, value]) => `${encoder(key)}=${encoder(value)}`)
     .join("&");
 }
 
