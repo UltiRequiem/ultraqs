@@ -1,4 +1,4 @@
-import { addParams, build, parse, query, stringify, t } from "./mod.ts";
+import { addParams, build, parse, query, stringify, t } from "../src/index.js";
 
 console.log(
   addParams("https://ultirequiem.com", { hello: "world", author: "Eliaz" }),

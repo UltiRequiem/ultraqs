@@ -1,5 +1,5 @@
-import { parseUrlLike, reassemble } from "./url-like.ts";
-import { decodePairs, serializePairs } from "./serialize.ts";
+import { parseUrlLike, reassemble } from "./url-like.js";
+import { decodePairs, serializePairs } from "./serialize.js";
 
 /**
  * Remove one or more query parameters from a URL.
@@ -30,8 +30,8 @@ export function removeParams(
 ): string | URL {
   const toRemove = new Set(Array.isArray(keys) ? keys : [keys]);
   const parsed = parseUrlLike(url);
-  const remaining = decodePairs(parsed.search).filter(([key]) =>
-    !toRemove.has(key)
+  const remaining = decodePairs(parsed.search).filter(
+    ([key]) => !toRemove.has(key),
   );
   const search = serializePairs(remaining);
   return reassemble(parsed, search, options.asURL ?? false);

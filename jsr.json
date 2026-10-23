@@ -1,6 +1,0 @@
-{
-  "name": "@ultirequiem/ultraqs",
-  "version": "2.0.0",
-  "license": "MIT",
-  "exports": "./mod.ts"
-}

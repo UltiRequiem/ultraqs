@@ -1,5 +1,5 @@
-import { flatten, serializePairs } from "./serialize.ts";
-import type { SerializeOptions } from "./types.ts";
+import { flatten, serializePairs } from "./serialize.js";
+import type { SerializeOptions } from "./types.js";
 
 /**
  * Serializes a plain object into a query string — no URL involved.

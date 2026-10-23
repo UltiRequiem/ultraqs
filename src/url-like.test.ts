@@ -1,45 +1,44 @@
-import assert from "node:assert/strict";
-import test from "node:test";
+import { expect, it as test } from "vitest";
 
-import { parseUrlLike, reassemble } from "./url-like.ts";
+import { parseUrlLike, reassemble } from "./url-like.js";
 
 test("parseUrlLike: absolute URL", () => {
   const parsed = parseUrlLike("https://example.com/api?a=1#top");
-  assert.equal(parsed.absolute, true);
-  assert.equal(parsed.prefix, "https://example.com");
-  assert.equal(parsed.pathname, "/api");
-  assert.equal(parsed.search, "a=1");
-  assert.equal(parsed.hash, "top");
+  expect(parsed.absolute).toBe(true);
+  expect(parsed.prefix).toBe("https://example.com");
+  expect(parsed.pathname).toBe("/api");
+  expect(parsed.search).toBe("a=1");
+  expect(parsed.hash).toBe("top");
 });
 
 test("parseUrlLike: relative path", () => {
   const parsed = parseUrlLike("/users/1?page=2#section");
-  assert.equal(parsed.absolute, false);
-  assert.equal(parsed.prefix, "");
-  assert.equal(parsed.pathname, "/users/1");
-  assert.equal(parsed.search, "page=2");
-  assert.equal(parsed.hash, "section");
+  expect(parsed.absolute).toBe(false);
+  expect(parsed.prefix).toBe("");
+  expect(parsed.pathname).toBe("/users/1");
+  expect(parsed.search).toBe("page=2");
+  expect(parsed.hash).toBe("section");
 });
 
 test("parseUrlLike: bare query string", () => {
   const parsed = parseUrlLike("?page=1&tags=a");
-  assert.equal(parsed.absolute, false);
-  assert.equal(parsed.pathname, "");
-  assert.equal(parsed.search, "page=1&tags=a");
+  expect(parsed.absolute).toBe(false);
+  expect(parsed.pathname).toBe("");
+  expect(parsed.search).toBe("page=1&tags=a");
 });
 
 test("reassemble: absolute, string and URL", () => {
   const parsed = parseUrlLike("https://example.com/api");
-  assert.equal(reassemble(parsed, "a=1", false), "https://example.com/api?a=1");
-  assert.ok(reassemble(parsed, "a=1", true) instanceof URL);
+  expect(reassemble(parsed, "a=1", false)).toBe("https://example.com/api?a=1");
+  expect(reassemble(parsed, "a=1", true) instanceof URL).toBeTruthy();
 });
 
 test("reassemble: relative stays a string", () => {
   const parsed = parseUrlLike("/users/1");
-  assert.equal(reassemble(parsed, "a=1", false), "/users/1?a=1");
+  expect(reassemble(parsed, "a=1", false)).toBe("/users/1?a=1");
 });
 
 test("reassemble: asURL throws for relative input", () => {
   const parsed = parseUrlLike("/users/1");
-  assert.throws(() => reassemble(parsed, "a=1", true), TypeError);
+  expect(() => reassemble(parsed, "a=1", true)).toThrow(TypeError);
 });

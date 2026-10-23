@@ -1,25 +1,19 @@
-import assert from "node:assert/strict";
-import test from "node:test";
+import { expect, it as test } from "vitest";
 
-import { stringify } from "./stringify.ts";
+import { stringify } from "./stringify.js";
 
 test("stringify: basic object", () => {
-  assert.equal(
-    stringify({ page: 2, tags: ["js", "ts"] }),
+  expect(stringify({ page: 2, tags: ["js", "ts"] })).toBe(
     "page=2&tags=js&tags=ts",
   );
 });
 
 test("stringify: comma array strategy", () => {
-  assert.equal(
-    stringify({ tags: ["js", "ts"] }, { array: "comma" }),
+  expect(stringify({ tags: ["js", "ts"] }, { array: "comma" })).toBe(
     "tags=js,ts",
   );
 });
 
 test("stringify: sort option", () => {
-  assert.equal(
-    stringify({ b: 2, a: 1 }, { sort: true }),
-    "a=1&b=2",
-  );
+  expect(stringify({ b: 2, a: 1 }, { sort: true })).toBe("a=1&b=2");
 });
